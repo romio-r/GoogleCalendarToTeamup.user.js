@@ -12,8 +12,15 @@
 (function() {
     'use strict';
     $(document).ready(function(){
-        $('body').prepend('<div>testing....</div>');
+            //$('body').prepend('<div>testing....</div>');
             setInterval(function(){
+                // ask for calendar id
+                var teamupId = localStorage.getItem('teamupClaendarId');
+                if(!teamupId){
+                   teamupId = prompt("Please your Teamup ID:", "");
+                   localStorage.setItem('teamupClaendarId', teamupId);
+                }
+
                 // if no opened calendar event details popup
                 if($(".osAuJb span").length == 0){
                    return;
@@ -38,7 +45,6 @@
 
                 //get start and end time
                 var startEndTime = $("div.NI2kfb div div.DN1TJ span").first().text().split(" – ");
-                console.log(startEndTime);
 
                 // get date
                 var date = $("div.kMp0We.OcVpRe>div.NI2kfb > div:first-child").first().contents().filter(function() {
@@ -51,7 +57,6 @@
                 date = date.map(x => ((x <= 9 ) ? "0"+x : x));
 
                 // build Teamup URL
-                var teamupId = 'xxx';
                 var teamupBaseURL = 'https://teamup.com/' + teamupId + '/events/new';
                 var teamupURL = teamupBaseURL
                 + "?start_dt=" + encodeURIComponent(year + '-' + date[0] + '-' + date[1] + ' ' + startEndTime[0] + ':00')
@@ -68,12 +73,3 @@
             }, 500);
     });
 })();
-
-                /*
-    var txt;
-    var person = prompt("Please enter your name:", "Harry Potter");
-    if (person == null || person == "") {
-        txt = "User cancelled the prompt.";
-    } else {
-        txt = "Hello " + person + "! How are you today?";
-    }*/
