@@ -17,7 +17,7 @@
             setInterval(function(){
                 // ask for calendar id
                 var teamupId = localStorage.getItem('teamupClaendarId');
-                if(!teamupId){
+                if((!teamupId) || (teamupId == 'null')){
                    teamupId = prompt("Please your Teamup ID:", "");
                    localStorage.setItem('teamupClaendarId', teamupId);
                 }
