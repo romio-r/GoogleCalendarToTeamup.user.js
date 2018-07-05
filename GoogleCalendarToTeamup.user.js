@@ -2,6 +2,7 @@
 // @name         Google calendar to Teamup teamup.com
 // @namespace    http://tampermonkey.net/
 // @version      0.1
+// @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/GoogleCalendarToTeamup.user.js
 // @description  Adds button to add Google calendar event to Teamup teamup.com calendar
 // @author       romio-r
 // @match        https://calendar.google.com/calendar/*
