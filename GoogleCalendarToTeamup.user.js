@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google calendar to Teamup teamup.com
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/GoogleCalendarToTeamup.user.js
 // @description  Adds button to add Google calendar event to Teamup teamup.com calendar
 // @author       romio-r
@@ -10,6 +10,7 @@
 // @grant        none
 // ==/UserScript==
 
+var tu_debug = false;
 (function() {
     'use strict';
     $(document).ready(function(){
@@ -17,6 +18,10 @@
             setInterval(function(){
                 // ask for calendar id
                 var teamupId = localStorage.getItem('teamupClaendarId');
+                if(tu_debug){
+                    console.log('teamupId: ' + teamupId);
+                }
+
                 if((!teamupId) || (teamupId == 'null')){
                    teamupId = prompt("Please your Teamup ID:", "");
                    localStorage.setItem('teamupClaendarId', teamupId);
@@ -24,6 +29,9 @@
 
                 // if no opened calendar event details popup
                 if($(".osAuJb span").length == 0){
+                   if(tu_debug){
+                       console.log('No opened calendar event details popup');
+                   }
                    return;
                 }
 
@@ -36,9 +44,15 @@
                 var title = $(".osAuJb span").text();
 
                 //get username
-                var user = $("a.gb_b.gb_ib.gb_R").attr('aria-label');
+                var user = $("a.gb_b.gb_R").attr('aria-label');
+                if(tu_debug){
+                    console.log('User raw: ' + user);
+                }
                 var reUser = /\((.+?)\@/im;
                 user = user.match(reUser)[1];
+                if(tu_debug){
+                    console.log('User final: ' + user);
+                }
 
                 // get year
                 var reYear = /\d{4}/im;
@@ -70,6 +84,10 @@
                     style=\"font-size: 75%\" \
                     href=\"" + teamupURL + "\"\
                     target=\"_blank\">Add to Teamup</a>";
+
+                if(($(".osAuJb span").length == 0) && tu_debug){
+                    console.log('No place to append integration');
+                }
                 $(".osAuJb").append("<div class=\"gctotsiyowise\" style=\"position: absolute; top: 12px; left: 20px; \">" + a + "</div>");
             }, 500);
     });
