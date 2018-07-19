@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google calendar to Teamup teamup.com
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/GoogleCalendarToTeamup.user.js
 // @description  Adds button to add Google calendar event to Teamup teamup.com calendar
 // @author       romio-r
@@ -56,16 +56,34 @@ var tu_debug = false;
 
                 // get year
                 var reYear = /\d{4}/im;
-                var year = $(".rSoRzd").text().match(reYear)[0];
+                var yearRaw = $(".rSoRzd").text();
+                var year = yearRaw.match(reYear)[0];
+                if(tu_debug){
+                    console.log('Year raw: ' + yearRaw);
+                    console.log('Year: ' + year);
+                }
 
                 //get start and end time
-                var startEndTime = $("div.NI2kfb div div.DN1TJ span").first().text().split(" – ");
+                var startEndTimeRaw = $("div.NI2kfb div div.DN1TJ span").first().text();
+                var startEndTime = startEndTimeRaw.split(" – ");
+                if(tu_debug){
+                    console.log('startEndTimeRaw: ' + startEndTimeRaw);
+                    console.log('startEndTime after split(final): ' + startEndTime);
+                }
 
                 // get date
-                var date = $("div.kMp0We.OcVpRe>div.NI2kfb > div:first-child").first().contents().filter(function() {
+                var dateRaw = $("div.kMp0We.OcVpRe>div.NI2kfb > div:first-child").first().contents();
+                var date = dateRaw.filter(function() {
                     return this.nodeType === 3;
                 }).text();
+                if(tu_debug){
+                    console.log('dateRaw: ' + dateRaw);
+                    console.log('dateString: ' + date);
+                }
                 date = date.split(", ")[1].split(" ");
+                if(tu_debug){
+                    console.log('date after split: ' + date);
+                }
                 // convert text name of month into number (example Jun into 7)
                 date[0] = new Date(Date.parse(date[0] +" 1, 2012")).getMonth()+1;
                 // add leading zero
