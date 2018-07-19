@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google calendar to Teamup teamup.com
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.5
 // @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/GoogleCalendarToTeamup.user.js
 // @description  Adds button to add Google calendar event to Teamup teamup.com calendar
 // @author       romio-r
@@ -85,7 +85,9 @@ var tu_debug = false;
                     console.log('date after split: ' + date);
                 }
                 // convert text name of month into number (example Jun into 7)
-                date[0] = new Date(Date.parse(date[0] +" 1, 2012")).getMonth()+1;
+                date[0] = "JanFebMarAprMayJunJulAugSepOctNovDec".indexOf(date[0].substring(0,3)) / 3 + 1;
+                // doesn't work because of some locale setings
+                // date[0] = new Date(Date.parse(date[0] +" 1, 2012")).getMonth()+1;
                 // add leading zero
                 date = date.map(x => ((x <= 9 ) ? "0"+x : x));
 
