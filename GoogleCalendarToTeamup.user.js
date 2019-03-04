@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Google calendar to Teamup teamup.com
 // @namespace    http://tampermonkey.net/
-// @version      0.7
+// @version      0.8
 // @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/GoogleCalendarToTeamup.user.js
 // @description  Adds button to add Google calendar event to Teamup teamup.com calendar
 // @author       romio-r
@@ -47,12 +47,13 @@ var tu_debug = false;
                 }
 
                 //get username
-                var user = $("a.gb_b.gb_R").attr('aria-label');
+                //var user = $("a.gb_b.gb_R").attr('aria-label');
+                var user = $(".gb_1a .gb_3a .gb_bb").text();
+
                 if(tu_debug){
                     console.log('User raw: ' + user);
                 }
-                var reUser = /\((.+?)\@/im;
-                user = user.match(reUser)[1];
+                user = user.split("@")[0];
                 if(tu_debug){
                     console.log('User final: ' + user);
                 }
