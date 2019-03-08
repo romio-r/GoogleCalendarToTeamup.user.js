@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DataDogCleaner
 // @namespace    http://tampermonkey.net/
-// @version      0.9
+// @version      0.91
 // @updateURL    https://github.com/romio-r/GoogleCalendarToTeamup.user.js/raw/master/DataDogCleaner.user.js
 // @description  Hides header at TV
 // @author       You
