@@ -15,5 +15,5 @@
     setInterval(() => {
         $(".header_sticky_vertical").hide()
         $(window).trigger('resize')
-    }, 1000)
+    }, 30000)
 })();
