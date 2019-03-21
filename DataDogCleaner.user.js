@@ -12,8 +12,14 @@
 (function() {
     'use strict';
 
+    // Attempt to remove header every 30 seconds
     setInterval(() => {
         $(".header_sticky_vertical").hide()
         $(window).trigger('resize')
     }, 30000)
+    
+    // Attempt to reload page every 5 minutes
+    setInterval(() => {
+        location.reload()
+    }, 300000)
 })();
